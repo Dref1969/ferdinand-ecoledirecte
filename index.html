@@ -3,233 +3,311 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🏴‍☠️ Ferdinand · WANTED</title>
+<title>🏴‍☠️ Ferdinand · One Piece</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Special+Elite&family=Cinzel:wght@600;900&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Bowlby+One&family=Fredoka:wght@500;700&family=Luckiest+Guy&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
 <style>
   :root {
-    --paper: #F4E4BC;
-    --paper-dark: #E8D199;
-    --paper-edge: #D4A66B;
-    --ink: #3A2515;
-    --sumi: #2A1810;
-    --red: #C8102E;
-    --red-dark: #8B0A1F;
-    --gold: #C9A961;
-    --gold-dark: #8B6F33;
-    --green-pirate: #4A6B3A;
-    --sea: #2C5A7C;
-    --wood: #8B4513;
-    --rope: #A0764C;
+    --sky: #6BB4DB;
+    --sky-deep: #1E90FF;
+    --sky-light: #C5E5F4;
+    --cloud: #FFFFFF;
+    --sun: #FFD700;
+    --sun-dark: #FFA500;
+    --ssg: #DC143C;
+    --ssg-dark: #9B0F2C;
+    --turquoise: #20B2AA;
+    --turquoise-light: #5EE0D8;
+    --sanji-orange: #FF8C42;
+    --robin-purple: #8B4789;
+    --nami-pink: #FF69B4;
+    --green-zoro: #2E8B57;
+    --ink: #1A1A2E;
+    --mugi-tan: #F4D27A;
+    --shadow: rgba(26, 26, 46, 0.25);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Special Elite', 'Courier New', serif;
-    background: var(--paper);
+    font-family: 'Fredoka', sans-serif;
     color: var(--ink);
     min-height: 100vh;
     overflow-x: hidden;
-    background-image:
-      /* Tâches papier vieilli */
-      radial-gradient(circle at 15% 20%, rgba(139, 90, 30, 0.15) 0%, transparent 8%),
-      radial-gradient(circle at 80% 30%, rgba(139, 90, 30, 0.1) 0%, transparent 6%),
-      radial-gradient(circle at 70% 75%, rgba(139, 90, 30, 0.12) 0%, transparent 10%),
-      radial-gradient(circle at 25% 85%, rgba(139, 90, 30, 0.1) 0%, transparent 7%),
-      /* Texture fibres */
-      repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(139, 90, 30, 0.02) 2px, rgba(139, 90, 30, 0.02) 4px),
-      /* Vignette */
-      radial-gradient(ellipse at center, var(--paper) 40%, var(--paper-dark) 100%);
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 255, 255, 0.5) 0%, transparent 60%),
+      linear-gradient(180deg, #87CEEB 0%, #6BB4DB 40%, #5EE0D8 100%);
+    background-attachment: fixed;
     position: relative;
   }
 
-  /* Jolly Roger filigrane */
-  body::before {
-    content: '';
+  /* Nuages animés en arrière-plan */
+  .cloud-bg {
     position: fixed;
-    bottom: 5%; right: 5%;
-    width: 300px; height: 300px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='35' r='18' fill='%233A2515' opacity='0.08'/%3E%3Ccircle cx='42' cy='32' r='3' fill='%23F4E4BC'/%3E%3Ccircle cx='58' cy='32' r='3' fill='%23F4E4BC'/%3E%3Cpath d='M40 45 Q50 52 60 45' stroke='%23F4E4BC' stroke-width='2' fill='none'/%3E%3Crect x='20' y='60' width='60' height='4' fill='%233A2515' opacity='0.08' transform='rotate(20 50 62)'/%3E%3Crect x='20' y='60' width='60' height='4' fill='%233A2515' opacity='0.08' transform='rotate(-20 50 62)'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-size: contain;
-    opacity: 0.5;
+    inset: 0;
     pointer-events: none;
+    overflow: hidden;
     z-index: 0;
   }
-
-  /* Bordure double papier */
-  .wanted-frame {
-    position: relative;
-    z-index: 1;
-    margin: 24px auto;
-    max-width: 1200px;
-    padding: 0 24px;
+  .cloud {
+    position: absolute;
+    background: white;
+    border-radius: 100px;
+    opacity: 0.75;
+    box-shadow:
+      30px -10px 0 -5px white,
+      60px 0 0 -10px white,
+      -20px 5px 0 -8px white;
+    animation: float-cloud 60s linear infinite;
+  }
+  .cloud.c1 { top: 8%; left: -10%; width: 100px; height: 30px; animation-duration: 80s; }
+  .cloud.c2 { top: 25%; left: -15%; width: 140px; height: 40px; animation-duration: 100s; animation-delay: -30s; }
+  .cloud.c3 { top: 50%; left: -20%; width: 80px; height: 25px; animation-duration: 70s; animation-delay: -20s; opacity: 0.6; }
+  .cloud.c4 { top: 70%; left: -10%; width: 120px; height: 35px; animation-duration: 90s; animation-delay: -60s; opacity: 0.5; }
+  @keyframes float-cloud {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(120vw); }
   }
 
-  /* HEADER WANTED */
+  /* Étoiles/Sparkles */
+  .sparkle {
+    position: fixed;
+    width: 8px; height: 8px;
+    background: var(--sun);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--sun), 0 0 24px rgba(255, 215, 0, 0.5);
+    animation: twinkle 2s ease-in-out infinite;
+    z-index: 0;
+    pointer-events: none;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.4; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+
+  /* Jolly Roger drapeau flottant */
+  .jolly-roger {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 80px;
+    height: 80px;
+    z-index: 1;
+    animation: wave 3s ease-in-out infinite;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  @keyframes wave {
+    0%, 100% { transform: rotate(-3deg) scale(1); }
+    50% { transform: rotate(3deg) scale(1.05); }
+  }
+
+  /* Conteneur */
+  .wrap { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+  /* HEADER */
   header {
-    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-dark) 100%);
-    border: 4px double var(--ink);
-    margin: 16px 0 32px;
-    padding: 32px 24px 24px;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 30px 20px 24px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+    border-radius: 32px;
+    border: 5px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--ink), 0 12px 40px var(--shadow);
+    margin-bottom: 28px;
     position: relative;
+    overflow: hidden;
   }
   header::before {
     content: '';
     position: absolute;
-    inset: 8px;
-    border: 1px solid var(--ink);
+    top: -40px; left: 50%;
+    transform: translateX(-50%);
+    width: 200%; height: 80px;
+    background: linear-gradient(180deg, var(--sun) 0%, transparent 100%);
+    opacity: 0.3;
     pointer-events: none;
   }
 
-  .skull {
-    font-size: 42px;
+  .skull-logo {
+    font-size: 56px;
     margin-bottom: 4px;
+    display: inline-block;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-8px) rotate(5deg); }
   }
 
   header h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 64px;
-    font-weight: 900;
-    color: var(--red);
-    letter-spacing: 12px;
-    margin: 4px 0;
-    text-shadow: 3px 3px 0 var(--ink), 6px 6px 8px rgba(0,0,0,0.2);
-    line-height: 1;
-  }
-  @media (max-width: 640px) { header h1 { font-size: 42px; letter-spacing: 6px; } }
-
-  header .alive {
-    font-family: 'Cinzel', serif;
-    font-weight: 600;
-    color: var(--ink);
-    font-size: 18px;
-    letter-spacing: 8px;
-    margin: 8px 0 4px;
-  }
-
-  header .ferdinand {
-    font-family: 'Cinzel', serif;
-    font-weight: 900;
-    color: var(--ink);
-    font-size: 36px;
-    letter-spacing: 16px;
-    margin: 16px 0 8px;
-    text-transform: uppercase;
-  }
-
-  header .bounty {
-    font-family: 'IM Fell English SC', serif;
-    color: var(--red-dark);
-    font-size: 14px;
+    font-family: 'Bowlby One', sans-serif;
+    font-size: 72px;
+    background: linear-gradient(180deg, var(--ssg) 0%, var(--ssg-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     letter-spacing: 4px;
-    margin-top: 12px;
+    text-shadow: 4px 4px 0 var(--ink);
+    line-height: 1;
+    margin: 4px 0 8px;
+    -webkit-text-stroke: 3px var(--ink);
+    paint-order: stroke fill;
+  }
+  @media (max-width: 640px) { header h1 { font-size: 44px; letter-spacing: 2px; } }
+
+  header .subtitle {
+    font-family: 'Luckiest Guy', cursive;
+    color: var(--sky-deep);
+    font-size: 20px;
+    letter-spacing: 4px;
+    -webkit-text-stroke: 1px var(--ink);
+    margin-bottom: 4px;
+  }
+
+  header .name {
+    font-family: 'Bowlby One', sans-serif;
+    color: var(--sun);
+    font-size: 38px;
+    letter-spacing: 8px;
+    margin: 12px 0 4px;
+    text-shadow: 3px 3px 0 var(--ink);
+    -webkit-text-stroke: 2px var(--ink);
+    paint-order: stroke fill;
+  }
+
+  header .crew {
+    font-family: 'Fredoka', sans-serif;
+    color: var(--ink);
+    font-size: 14px;
+    letter-spacing: 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 8px;
   }
 
   header .date {
-    font-family: 'Special Elite', serif;
-    color: var(--gold-dark);
-    font-size: 12px;
+    font-family: 'Luckiest Guy', cursive;
+    color: var(--robin-purple);
+    font-size: 14px;
     letter-spacing: 3px;
-    margin-top: 8px;
+    margin-top: 12px;
     text-transform: uppercase;
   }
 
-  /* NAV */
+  /* NAV onglets = boutons cartoon */
   nav.tabs {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 4px;
-    background: var(--paper-dark);
-    border: 3px double var(--ink);
+    gap: 12px;
     margin-bottom: 24px;
-    padding: 6px;
   }
   nav.tabs button {
-    background: var(--paper);
-    border: 2px solid var(--ink);
-    padding: 12px 22px;
-    font-family: 'Bangers', cursive;
-    font-size: 17px;
-    letter-spacing: 3px;
+    background: var(--cloud);
+    border: 4px solid var(--ink);
+    padding: 14px 24px;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 18px;
+    letter-spacing: 2px;
     color: var(--ink);
     cursor: pointer;
-    transition: all 0.2s;
-    text-transform: uppercase;
-    box-shadow: 2px 2px 0 var(--ink);
+    border-radius: 24px;
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: all 0.15s;
+    -webkit-text-stroke: 0.5px var(--ink);
   }
   nav.tabs button:hover {
-    background: var(--gold);
-    transform: translate(-1px, -1px);
-    box-shadow: 3px 3px 0 var(--ink);
+    background: var(--sun);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--ink);
   }
+  nav.tabs button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
   nav.tabs button.active {
-    background: var(--red);
-    color: var(--paper);
-    transform: translate(1px, 1px);
-    box-shadow: 1px 1px 0 var(--ink);
+    background: var(--ssg);
+    color: white;
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--ink);
   }
 
-  /* CONTENU */
   main { padding-bottom: 60px; }
-  .panel { display: none; animation: fadeIn 0.4s ease; }
+  .panel { display: none; animation: pop 0.4s cubic-bezier(.68,-0.55,.27,1.55); }
   .panel.active { display: block; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pop { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 
-  /* KPI cards = small wanted posters */
+  /* KPI = bulles colorées */
   .kpi-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: 14px;
-    margin-bottom: 24px;
+    gap: 16px;
+    margin-bottom: 28px;
   }
   .kpi {
-    background: var(--paper);
-    border: 3px solid var(--ink);
-    padding: 16px 12px;
+    background: white;
+    border: 4px solid var(--ink);
+    border-radius: 24px;
+    padding: 20px 12px;
     text-align: center;
-    position: relative;
-    box-shadow: 4px 4px 0 var(--ink);
-  }
-  .kpi-val {
-    font-family: 'Bangers', cursive;
-    font-size: 48px;
-    color: var(--red);
-    line-height: 1;
-    margin-bottom: 4px;
-    text-shadow: 2px 2px 0 var(--ink);
-  }
-  .kpi-label {
-    font-family: 'IM Fell English SC', serif;
-    font-size: 13px;
-    color: var(--ink);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: bold;
-  }
-
-  /* CARDS DEVOIRS */
-  .card {
-    background: var(--paper);
-    border: 2px solid var(--ink);
-    margin-bottom: 14px;
-    padding: 14px 18px;
-    box-shadow: 3px 3px 0 var(--ink);
+    box-shadow: 5px 5px 0 var(--ink);
     transition: transform 0.2s;
     position: relative;
   }
-  .card:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--ink); }
-  .card.urgent { border-color: var(--red); border-width: 3px; background: linear-gradient(135deg, var(--paper) 80%, #fce2e2 100%); }
-  .card.important { border-color: var(--gold-dark); border-width: 2px; }
-  .card.fait { opacity: 0.55; background: #E8D199; }
+  .kpi:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--ink); }
+  .kpi-val {
+    font-family: 'Bowlby One', sans-serif;
+    font-size: 56px;
+    line-height: 1;
+    margin-bottom: 4px;
+    -webkit-text-stroke: 2px var(--ink);
+    paint-order: stroke fill;
+    text-shadow: 3px 3px 0 var(--ink);
+  }
+  .kpi.k1 .kpi-val { color: var(--ssg); }
+  .kpi.k2 .kpi-val { color: var(--sun); }
+  .kpi.k3 .kpi-val { color: var(--turquoise); }
+  .kpi.k4 .kpi-val { color: var(--robin-purple); }
+  .kpi-label {
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 14px;
+    color: var(--ink);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* CARDS = bulles devoirs */
+  .card {
+    background: white;
+    border: 4px solid var(--ink);
+    border-radius: 20px;
+    margin-bottom: 16px;
+    padding: 16px 20px;
+    box-shadow: 5px 5px 0 var(--ink);
+    transition: all 0.2s;
+    position: relative;
+  }
+  .card:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--ink); }
+  .card.urgent {
+    background: linear-gradient(135deg, #fff 0%, #FFE5E9 100%);
+    border-color: var(--ssg);
+    border-width: 5px;
+  }
+  .card.urgent::after {
+    content: '⚡';
+    position: absolute;
+    top: -16px; right: 16px;
+    background: var(--sun);
+    border: 3px solid var(--ink);
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .card.important { background: linear-gradient(135deg, #fff 0%, #FFF8DC 100%); border-color: var(--sun-dark); }
+  .card.fait { background: #F0F8F0; opacity: 0.65; }
   .card.fait .contenu { text-decoration: line-through; }
 
   .card-head {
@@ -239,70 +317,79 @@
   }
   .card-matiere {
     font-family: 'Bangers', cursive;
-    font-size: 22px;
-    letter-spacing: 2px;
-    color: var(--red-dark);
+    font-size: 26px;
+    letter-spacing: 1.5px;
+    color: var(--ssg);
     flex: 1;
-    text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+    -webkit-text-stroke: 1px var(--ink);
+    text-shadow: 2px 2px 0 var(--ink);
+    line-height: 1;
   }
-  .card-meta {
-    text-align: right;
-    font-size: 11px;
-    color: var(--gold-dark);
-    letter-spacing: 1px;
-    font-family: 'IM Fell English SC', serif;
-  }
+  .card.important .card-matiere { color: var(--sun-dark); }
+  .card-meta { text-align: right; }
   .card-date {
     font-family: 'Bangers', cursive;
-    color: var(--ink);
-    font-size: 16px;
+    color: var(--sky-deep);
+    font-size: 22px;
+    letter-spacing: 1px;
+    -webkit-text-stroke: 1px var(--ink);
   }
   .card .contenu {
     color: var(--ink);
     font-size: 14px;
-    margin-top: 6px;
+    margin-top: 8px;
     line-height: 1.5;
-    font-family: 'Special Elite', serif;
+    font-weight: 500;
   }
 
-  /* CHECKBOX pirate */
+  /* Checkbox cartoon */
   .check-fait {
     appearance: none;
-    width: 30px; height: 30px;
-    border: 2px solid var(--ink);
-    background: var(--paper);
+    width: 34px; height: 34px;
+    border: 3px solid var(--ink);
+    background: white;
     cursor: pointer;
     position: relative;
     flex-shrink: 0;
-    box-shadow: 2px 2px 0 var(--ink);
+    border-radius: 10px;
+    box-shadow: 3px 3px 0 var(--ink);
+    transition: all 0.2s;
   }
-  .check-fait:hover { background: var(--gold); }
-  .check-fait:checked { background: var(--green-pirate); border-color: var(--ink); }
+  .check-fait:hover { background: var(--sun); transform: rotate(-5deg); }
+  .check-fait:checked {
+    background: var(--turquoise);
+    transform: rotate(0deg);
+  }
   .check-fait:checked::after {
-    content: '☠';
+    content: '✓';
     position: absolute;
     top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--paper);
-    font-size: 20px;
+    transform: translate(-50%, -55%);
+    color: white;
+    font-size: 26px;
+    font-weight: 900;
+    text-shadow: 1.5px 1.5px 0 var(--ink);
   }
 
+  /* Badges */
   .badge {
     display: inline-block;
-    padding: 3px 10px;
-    font-family: 'Bangers', cursive;
-    font-size: 11px;
-    letter-spacing: 2px;
+    padding: 4px 12px;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 12px;
+    letter-spacing: 1.5px;
     margin-top: 6px;
-    border: 1.5px solid var(--ink);
+    border: 2px solid var(--ink);
+    border-radius: 16px;
     text-transform: uppercase;
+    box-shadow: 2px 2px 0 var(--ink);
   }
-  .badge.urgent { background: var(--red); color: var(--paper); }
-  .badge.important { background: var(--gold); color: var(--ink); }
-  .badge.normal { background: var(--green-pirate); color: var(--paper); }
-  .badge.demain { background: var(--ink); color: var(--paper); }
+  .badge.urgent { background: var(--ssg); color: white; }
+  .badge.important { background: var(--sun); color: var(--ink); }
+  .badge.normal { background: var(--turquoise); color: white; }
+  .badge.demain { background: var(--robin-purple); color: white; }
 
-  /* SECTION */
+  /* Section titres */
   .section-titre {
     display: flex;
     align-items: center;
@@ -310,106 +397,135 @@
     gap: 12px;
   }
   .section-titre h2 {
-    font-family: 'Bangers', cursive;
-    color: var(--red);
+    font-family: 'Luckiest Guy', cursive;
+    color: white;
+    background: var(--ssg);
     font-size: 26px;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
+    padding: 8px 22px;
+    border: 4px solid var(--ink);
+    border-radius: 20px;
     text-transform: uppercase;
-    text-shadow: 2px 2px 0 var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+    -webkit-text-stroke: 0.5px var(--ink);
   }
-  .section-titre .ligne { flex: 1; height: 3px; background: repeating-linear-gradient(90deg, var(--ink) 0 8px, transparent 8px 14px); }
+  .section-titre .ligne {
+    flex: 1;
+    height: 5px;
+    background: repeating-linear-gradient(90deg, var(--ink) 0 12px, transparent 12px 20px);
+    border-radius: 3px;
+  }
 
   /* EDT grille */
   .edt-grid {
     display: grid;
     grid-template-columns: 70px repeat(6, 1fr);
-    gap: 2px;
+    gap: 4px;
     background: var(--ink);
-    border: 3px solid var(--ink);
-    box-shadow: 4px 4px 0 var(--ink);
-    margin-bottom: 16px;
+    border: 4px solid var(--ink);
+    border-radius: 16px;
+    box-shadow: 5px 5px 0 var(--ink);
+    margin-bottom: 20px;
+    padding: 4px;
     overflow-x: auto;
   }
   .edt-cell {
-    background: var(--paper);
-    padding: 4px;
-    min-height: 32px;
+    background: white;
+    padding: 5px;
+    min-height: 36px;
     position: relative;
     font-size: 11px;
+    border-radius: 6px;
   }
   .edt-cell.head {
-    background: var(--ink);
-    color: var(--paper);
+    background: var(--sky-deep);
+    color: white;
     font-family: 'Bangers', cursive;
     text-align: center;
     padding: 8px 4px;
     font-size: 14px;
     letter-spacing: 1px;
+    -webkit-text-stroke: 0.5px var(--ink);
   }
+  .edt-cell.head.today { background: var(--ssg); }
   .edt-cell.heure {
-    background: var(--paper-dark);
+    background: var(--sun);
     color: var(--ink);
-    font-family: 'Bangers', cursive;
+    font-family: 'Bowlby One', sans-serif;
     text-align: center;
-    padding: 4px;
-    font-size: 12px;
+    padding: 6px 4px;
+    font-size: 14px;
   }
-  .edt-cell.today { background: linear-gradient(180deg, #fff7d6 0%, var(--paper) 100%); border-left: 3px solid var(--red); }
+  .edt-cell.today { background: #FFF8DC; border: 2px solid var(--sun-dark); }
   .cours {
-    background: var(--gold);
-    border-left: 4px solid var(--ink);
+    background: var(--turquoise-light);
+    border: 2px solid var(--ink);
+    border-radius: 8px;
     padding: 4px 6px;
-    margin-bottom: 2px;
-    font-family: 'Special Elite', serif;
+    margin-bottom: 3px;
+    font-family: 'Fredoka', sans-serif;
+    box-shadow: 1.5px 1.5px 0 var(--ink);
   }
-  .cours .matiere { font-weight: bold; color: var(--ink); font-size: 11px; }
-  .cours .prof { color: var(--ink); font-size: 10px; opacity: 0.7; }
-  .cours .salle { color: var(--red-dark); font-size: 10px; }
-  .cours.annule { background: #ffd6d6; opacity: 0.5; text-decoration: line-through; }
+  .cours .matiere { font-weight: 700; color: var(--ink); font-size: 11px; line-height: 1.1; }
+  .cours .prof { color: var(--ink); font-size: 9px; opacity: 0.75; }
+  .cours .salle { color: var(--ssg); font-size: 10px; font-weight: 700; }
+  .cours.annule { background: #FFE5E9; opacity: 0.5; text-decoration: line-through; }
 
   /* Notes */
   .note-card {
     display: grid;
-    grid-template-columns: 90px 1fr 110px;
+    grid-template-columns: 90px 1fr 120px;
     align-items: center;
     gap: 14px;
-    background: var(--paper);
-    border: 2px solid var(--ink);
-    padding: 12px 18px;
-    margin-bottom: 6px;
-    box-shadow: 2px 2px 0 var(--ink);
+    background: white;
+    border: 3px solid var(--ink);
+    padding: 14px 20px;
+    margin-bottom: 8px;
+    box-shadow: 3px 3px 0 var(--ink);
+    border-radius: 16px;
+    transition: all 0.2s;
   }
-  .note-date { font-family: 'Special Elite'; font-size: 12px; color: var(--gold-dark); }
-  .note-matiere { font-family: 'Bangers', cursive; color: var(--ink); font-size: 17px; letter-spacing: 1px; }
-  .note-devoir { font-size: 11px; color: var(--gold-dark); font-family: 'Special Elite'; }
+  .note-card:hover { transform: translate(-1px, -1px); }
+  .note-date {
+    font-family: 'Bangers';
+    font-size: 16px;
+    color: var(--sky-deep);
+    -webkit-text-stroke: 0.5px var(--ink);
+  }
+  .note-matiere { font-family: 'Bangers', cursive; color: var(--ink); font-size: 19px; letter-spacing: 1px; }
+  .note-devoir { font-size: 11px; color: #666; font-weight: 500; }
   .note-valeur {
-    font-family: 'Bangers', cursive;
-    font-size: 30px;
+    font-family: 'Bowlby One', sans-serif;
+    font-size: 32px;
     text-align: right;
     letter-spacing: 1px;
+    -webkit-text-stroke: 2px var(--ink);
+    paint-order: stroke fill;
     text-shadow: 2px 2px 0 var(--ink);
   }
-  .note-valeur.bonne { color: var(--green-pirate); }
-  .note-valeur.moyenne { color: var(--gold-dark); }
-  .note-valeur.basse { color: var(--red); }
-  .note-valeur small { font-size: 14px; color: var(--ink); text-shadow: none; opacity: 0.6; }
+  .note-valeur.bonne { color: var(--turquoise); }
+  .note-valeur.moyenne { color: var(--sun); }
+  .note-valeur.basse { color: var(--ssg); }
+  .note-valeur small { font-size: 14px; opacity: 0.6; text-shadow: none; -webkit-text-stroke: 0.5px var(--ink); }
 
   /* Chart */
   .chart-container {
-    background: var(--paper);
-    border: 3px solid var(--ink);
-    padding: 20px;
+    background: white;
+    border: 4px solid var(--ink);
+    border-radius: 24px;
+    padding: 24px;
     margin-bottom: 16px;
-    box-shadow: 4px 4px 0 var(--ink);
+    box-shadow: 5px 5px 0 var(--ink);
   }
   .chart-container h3 {
-    font-family: 'Bangers', cursive;
-    color: var(--red);
-    font-size: 24px;
+    font-family: 'Luckiest Guy', cursive;
+    color: var(--ssg);
+    font-size: 26px;
     letter-spacing: 3px;
     text-transform: uppercase;
     text-align: center;
     margin-bottom: 16px;
+    -webkit-text-stroke: 1px var(--ink);
     text-shadow: 2px 2px 0 var(--ink);
   }
 
@@ -417,12 +533,16 @@
   .empty {
     text-align: center;
     padding: 60px 20px;
-    font-family: 'IM Fell English SC';
-    color: var(--gold-dark);
+    font-family: 'Fredoka';
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    background: rgba(255,255,255,0.3);
+    border: 3px dashed var(--ink);
+    border-radius: 24px;
   }
   .empty .skull {
     font-size: 80px;
-    opacity: 0.4;
     margin-bottom: 16px;
   }
 
@@ -430,7 +550,7 @@
   #loader {
     position: fixed;
     inset: 0;
-    background: var(--paper);
+    background: linear-gradient(180deg, #87CEEB 0%, #5EE0D8 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -440,70 +560,93 @@
   }
   #loader.done { opacity: 0; pointer-events: none; }
   #loader .skull-big {
-    font-size: 100px;
-    animation: sway 1.5s ease-in-out infinite;
+    font-size: 120px;
+    animation: bounce 1.5s ease-in-out infinite;
+    filter: drop-shadow(4px 4px 0 var(--ink));
   }
-  @keyframes sway { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
   #loader .txt {
-    font-family: 'Bangers', cursive;
-    color: var(--red);
-    font-size: 32px;
+    font-family: 'Bowlby One', sans-serif;
+    color: var(--ssg);
+    font-size: 36px;
     letter-spacing: 6px;
-    margin-top: 16px;
-    text-shadow: 2px 2px 0 var(--ink);
+    margin-top: 20px;
+    -webkit-text-stroke: 2px var(--ink);
+    text-shadow: 3px 3px 0 var(--ink);
   }
 
   /* Footer */
   footer {
     text-align: center;
     padding: 24px;
-    color: var(--gold-dark);
-    font-family: 'IM Fell English SC';
-    font-size: 12px;
+    color: white;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 14px;
     letter-spacing: 3px;
-    border-top: 3px double var(--ink);
+    -webkit-text-stroke: 0.5px var(--ink);
+    text-shadow: 2px 2px 0 var(--ink);
     margin-top: 40px;
   }
 
   .config-warn {
-    background: #FFF3CD;
-    border: 2px solid var(--gold-dark);
+    background: var(--sun);
+    border: 4px solid var(--ink);
     color: var(--ink);
     padding: 16px;
     margin: 16px 0;
     text-align: center;
-    font-family: 'Special Elite';
+    font-family: 'Fredoka';
+    font-weight: 700;
+    border-radius: 16px;
+    box-shadow: 4px 4px 0 var(--ink);
   }
-  .config-warn code { background: rgba(0,0,0,0.08); padding: 2px 6px; }
+  .config-warn code { background: rgba(0,0,0,0.1); padding: 2px 6px; border-radius: 4px; }
 </style>
 </head>
 <body>
+
+<div class="cloud-bg" id="cloudBg">
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+  <div class="cloud c4"></div>
+</div>
+
+<svg class="jolly-roger" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <rect x="20" y="10" width="60" height="22" rx="6" fill="#F4D27A" stroke="#1A1A2E" stroke-width="3"/>
+  <rect x="32" y="8" width="36" height="6" rx="2" fill="#DC143C" stroke="#1A1A2E" stroke-width="2"/>
+  <circle cx="50" cy="55" r="20" fill="white" stroke="#1A1A2E" stroke-width="3"/>
+  <circle cx="42" cy="52" r="4" fill="#1A1A2E"/>
+  <circle cx="58" cy="52" r="4" fill="#1A1A2E"/>
+  <path d="M40 65 Q50 72 60 65" stroke="#1A1A2E" stroke-width="2.5" fill="none"/>
+  <rect x="25" y="76" width="50" height="3" fill="#1A1A2E" transform="rotate(20 50 78)"/>
+  <rect x="25" y="76" width="50" height="3" fill="#1A1A2E" transform="rotate(-20 50 78)"/>
+</svg>
 
 <div id="loader">
   <div class="skull-big">🏴‍☠️</div>
   <div class="txt">CHARGEMENT</div>
 </div>
 
-<div class="wanted-frame">
+<div class="wrap">
   <header>
-    <div class="skull">🏴‍☠️</div>
-    <h1>WANTED</h1>
-    <div class="alive">DEAD OR ALIVE</div>
-    <div class="ferdinand">FERDINAND</div>
-    <div class="bounty">RECOMPENSE : DEVOIRS, NOTES &amp; EMPLOI DU TEMPS</div>
+    <div class="skull-logo">🏴‍☠️</div>
+    <h1>ONE PIECE</h1>
+    <div class="subtitle">★ MUGIWARA CREW ★</div>
+    <div class="name">FERDINAND</div>
+    <div class="crew">CAPITAINE · DEVOIRS · NOTES · EMPLOI DU TEMPS</div>
     <div class="date" id="dateJour"></div>
   </header>
 
   <nav class="tabs">
     <button class="active" data-tab="devoirs">⚓ DEVOIRS</button>
-    <button data-tab="edt">🗺️ EMPLOI DU TEMPS</button>
-    <button data-tab="priorites">💥 PRIORITÉS</button>
+    <button data-tab="edt">🗺️ EDT</button>
+    <button data-tab="priorites">⚡ PRIORITÉS</button>
     <button data-tab="notes">📜 NOTES</button>
   </nav>
 
   <main>
     <div id="configWarn" class="config-warn" style="display:none;">
-      ⚠️ Configuration requise : remplace <code>APPS_SCRIPT_URL</code> en haut du fichier <code>index.html</code> par l'URL de ton Apps Script déployé.
+      ⚠️ Configuration requise : remplace <code>APPS_SCRIPT_URL</code> dans <code>index.html</code>.
     </div>
 
     <section class="panel active" id="panel-devoirs">
@@ -521,11 +664,11 @@
 
     <section class="panel" id="panel-notes">
       <div class="chart-container">
-        <h3>⚡ Niveaux par matière</h3>
+        <h3>⚡ Niveaux Mugiwara</h3>
         <canvas id="chartMoyennes" height="140"></canvas>
       </div>
       <div class="section-titre">
-        <h2>Dernières notes</h2>
+        <h2>Dernières Notes</h2>
         <span class="ligne"></span>
       </div>
       <div id="notesListe"></div>
@@ -533,7 +676,7 @@
   </main>
 
   <footer>
-    🏴‍☠️ MIS À JOUR : <span id="lastUpdate">—</span> · ONE PIECE EDITION
+    🌊 MIS À JOUR : <span id="lastUpdate">—</span> · GRAND LINE EDITION ⚓
   </footer>
 </div>
 
@@ -544,6 +687,19 @@ let DATA = { devoirs: [], notes: [], edt: [], priorites: { moyennes: [], priorit
 
 function setDateJour() {
   document.getElementById('dateJour').textContent = new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase();
+}
+
+// Sparkles aléatoires
+function spawnSparkles() {
+  for (let i = 0; i < 12; i++) {
+    const s = document.createElement('div');
+    s.className = 'sparkle';
+    s.style.left = Math.random() * 100 + 'vw';
+    s.style.top = Math.random() * 100 + 'vh';
+    s.style.animationDelay = (Math.random() * 3) + 's';
+    s.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+    document.body.appendChild(s);
+  }
 }
 
 document.querySelectorAll('nav.tabs button').forEach(btn => {
@@ -590,13 +746,13 @@ function renderDevoirs() {
   const enRetard = liste.filter(d => !d.fait && new Date(d.date_remise) < today);
 
   document.getElementById('kpiDevoirs').innerHTML = `
-    <div class="kpi"><div class="kpi-val">${aFaire.length}</div><div class="kpi-label">À FAIRE</div></div>
-    <div class="kpi"><div class="kpi-val">${pourDemain.length}</div><div class="kpi-label">DEMAIN</div></div>
-    <div class="kpi"><div class="kpi-val" style="color:var(--green-pirate)">${faits.length}</div><div class="kpi-label">FAITS</div></div>
-    <div class="kpi"><div class="kpi-val" style="color:var(--red-dark)">${enRetard.length}</div><div class="kpi-label">EN RETARD</div></div>`;
+    <div class="kpi k1"><div class="kpi-val">${aFaire.length}</div><div class="kpi-label">À FAIRE</div></div>
+    <div class="kpi k2"><div class="kpi-val">${pourDemain.length}</div><div class="kpi-label">DEMAIN</div></div>
+    <div class="kpi k3"><div class="kpi-val">${faits.length}</div><div class="kpi-label">FAITS</div></div>
+    <div class="kpi k4"><div class="kpi-val">${enRetard.length}</div><div class="kpi-label">EN RETARD</div></div>`;
 
   if (liste.length === 0) {
-    document.getElementById('devoirsListe').innerHTML = `<div class="empty"><div class="skull">🏴‍☠️</div>Aucun devoir saisi</div>`;
+    document.getElementById('devoirsListe').innerHTML = `<div class="empty"><div class="skull">🏴‍☠️</div>Aucune mission en cours !</div>`;
     return;
   }
   const groupes = {};
@@ -663,18 +819,11 @@ function renderEdt() {
     document.getElementById('edtSemaine').innerHTML = `<div class="empty"><div class="skull">🗺️</div>Pas d'emploi du temps</div>`;
     return;
   }
-  // Trouver lundi de la semaine en cours
   const today = new Date(); today.setHours(0,0,0,0);
   const dow = today.getDay() || 7;
   const monday = new Date(today); monday.setDate(monday.getDate() - dow + 1);
-  // Liste les 6 jours (lundi-samedi)
   const jours = [];
-  for (let i = 0; i < 6; i++) {
-    const d = new Date(monday); d.setDate(d.getDate() + i);
-    jours.push(d);
-  }
-
-  // Filtrer cours de cette semaine et groupes par jour
+  for (let i = 0; i < 6; i++) { const d = new Date(monday); d.setDate(d.getDate() + i); jours.push(d); }
   const coursParJour = {};
   edt.forEach(c => {
     if (!c.start) return;
@@ -683,8 +832,6 @@ function renderEdt() {
     coursParJour[dStr].push(c);
   });
   Object.values(coursParJour).forEach(arr => arr.sort((a,b) => String(a.start).localeCompare(String(b.start))));
-
-  // Heures de 8h à 18h
   const heures = [];
   for (let h = 8; h <= 17; h++) heures.push(h);
 
@@ -694,10 +841,8 @@ function renderEdt() {
   jours.forEach(j => {
     const isToday = j.getTime() === today.getTime();
     const lbl = j.toLocaleDateString('fr-FR', { weekday: 'short', day: '2-digit', month: '2-digit' });
-    html += `<div class="edt-cell head"${isToday ? ' style="background:var(--red)"' : ''}>${lbl}</div>`;
+    html += `<div class="edt-cell head ${isToday?'today':''}">${lbl}</div>`;
   });
-
-  // Pour chaque heure, créer une ligne
   heures.forEach(h => {
     html += `<div class="edt-cell heure">${h}h</div>`;
     jours.forEach(j => {
@@ -712,10 +857,10 @@ function renderEdt() {
         const startTime = String(c.start).substring(11, 16);
         const endTime = String(c.end).substring(11, 16);
         const annule = c.annule === 'Oui';
-        cellHtml += `<div class="cours ${annule ? 'annule' : ''}" style="border-left-color:${c.couleur || 'var(--ink)'}">
-                       <div class="matiere">${escapeHtml(c.matiere || '')}</div>
-                       <div style="font-size:9px; color:var(--gold-dark);">${startTime}-${endTime}</div>
-                       ${c.prof ? `<div class="prof">${escapeHtml(c.prof.substring(0, 20))}</div>` : ''}
+        cellHtml += `<div class="cours ${annule ? 'annule' : ''}" style="background:${pickCourseColor(c.couleur)}">
+                       <div class="matiere">${escapeHtml((c.matiere || '').substring(0, 22))}</div>
+                       <div style="font-size:9px; color:var(--ink); font-weight:600;">${startTime}-${endTime}</div>
+                       ${c.prof ? `<div class="prof">${escapeHtml(String(c.prof).substring(0, 18))}</div>` : ''}
                        ${c.salle ? `<div class="salle">📍 ${escapeHtml(c.salle)}</div>` : ''}
                      </div>`;
       });
@@ -724,7 +869,6 @@ function renderEdt() {
   });
   html += `</div>`;
 
-  // Cours du jour résumés
   const dStrToday = today.toISOString().substring(0, 10);
   const aujourdhui = coursParJour[dStrToday] || [];
   if (aujourdhui.length > 0) {
@@ -733,11 +877,11 @@ function renderEdt() {
       const startTime = String(c.start).substring(11, 16);
       const endTime = String(c.end).substring(11, 16);
       const annule = c.annule === 'Oui';
-      html += `<div class="card ${annule ? 'fait' : ''}" style="border-left: 5px solid ${c.couleur || 'var(--ink)'}">
+      html += `<div class="card ${annule ? 'fait' : ''}" style="border-left: 8px solid ${pickCourseColor(c.couleur, true)}">
                  <div class="card-head">
                    <div style="flex:1">
-                     <div class="card-matiere">${escapeHtml(c.matiere || '')} ${annule ? '<span style="color:var(--red); font-size:14px;">⚠️ ANNULÉ</span>' : ''}</div>
-                     <div style="color:var(--ink); font-size:13px; font-family:'Special Elite';">${c.prof || ''} ${c.salle ? '· 📍 ' + c.salle : ''}</div>
+                     <div class="card-matiere">${escapeHtml(c.matiere || '')} ${annule ? '<span style="color:var(--ssg); font-size:14px;">⚠️ ANNULÉ</span>' : ''}</div>
+                     <div style="color:var(--ink); font-size:13px; font-weight:500; margin-top:4px;">${c.prof || ''} ${c.salle ? '· 📍 ' + c.salle : ''}</div>
                    </div>
                    <div class="card-meta"><div class="card-date">${startTime}<br>${endTime}</div></div>
                  </div>
@@ -746,25 +890,34 @@ function renderEdt() {
   }
   document.getElementById('edtSemaine').innerHTML = html;
 }
+function pickCourseColor(c, solid) {
+  if (!c) return solid ? '#20B2AA' : '#5EE0D8';
+  // Couleurs pastel inspirées des Mugiwara
+  const palette = solid
+    ? ['#DC143C', '#20B2AA', '#FFD700', '#8B4789', '#FF8C42', '#2E8B57', '#1E90FF']
+    : ['#FFB6C1', '#5EE0D8', '#FFE066', '#D4A5D8', '#FFB48A', '#90E090', '#A8D8FF'];
+  let h = 0; for (let i = 0; i < c.length; i++) h = (h*31 + c.charCodeAt(i)) | 0;
+  return palette[Math.abs(h) % palette.length];
+}
 
 /* ---- PRIORITES ---- */
 function renderPriorites() {
   const prio = (DATA.priorites && DATA.priorites.priorites) || [];
   if (prio.length === 0) {
-    document.getElementById('prioritesListe').innerHTML = `<div class="empty"><div class="skull">⚓</div>Toutes les primes sont collectées !</div>`;
+    document.getElementById('prioritesListe').innerHTML = `<div class="empty"><div class="skull">⚓</div>Aventure en pause - aucune prime !</div>`;
     return;
   }
   const urg = prio.filter(p => p.niveau === 'URGENT');
   const imp = prio.filter(p => p.niveau === 'IMPORTANT');
   const nor = prio.filter(p => p.niveau === 'NORMAL');
-  let html = `<div class="card" style="background: var(--gold); border:3px solid var(--ink);"><div class="card-matiere">📜 Système de primes</div><div class="contenu">Tri par <b>urgence</b> + matières en difficulté en priorité (comme la chasse aux pirates les plus dangereux).</div></div>`;
+  let html = `<div class="card" style="background: linear-gradient(135deg, #FFE066 0%, #FFD700 100%); border-color: var(--ink);"><div class="card-matiere" style="color: var(--ink); text-shadow: 2px 2px 0 white;">⚡ SYSTÈME DE PRIMES</div><div class="contenu" style="font-weight: 600;">Tri par <b>urgence</b> + matières où Ferdinand est faible (priorité plus haute).</div></div>`;
   if (urg.length) { html += `<div class="section-titre"><h2>💥 URGENT</h2><span class="ligne"></span></div>`; urg.forEach(p => html += cardPrio(p, 'urgent')); }
   if (imp.length) { html += `<div class="section-titre"><h2>⚔️ IMPORTANT</h2><span class="ligne"></span></div>`; imp.forEach(p => html += cardPrio(p, 'important')); }
   if (nor.length) { html += `<div class="section-titre"><h2>🗡️ NORMAL</h2><span class="ligne"></span></div>`; nor.forEach(p => html += cardPrio(p, 'normal')); }
   document.getElementById('prioritesListe').innerHTML = html;
 }
 function cardPrio(p, cls) {
-  const moy = (p.moyenne_matiere != null) ? `<span style="font-size:11px; color:var(--gold-dark);"> · moy: <b style="color:${p.moyenne_matiere>=14?'var(--green-pirate)':p.moyenne_matiere>=10?'var(--gold-dark)':'var(--red)'}">${p.moyenne_matiere}/20</b></span>` : '';
+  const moy = (p.moyenne_matiere != null) ? `<span style="font-size:12px; color:var(--ink); font-weight: 700;"> · moy: <b style="color:${p.moyenne_matiere>=14?'var(--turquoise)':p.moyenne_matiere>=10?'var(--sun-dark)':'var(--ssg)'}">${p.moyenne_matiere}/20</b></span>` : '';
   const j = p.jours_restants;
   let r;
   if (j < 0) r = `<span class="badge urgent">EN RETARD ${-j}j</span>`;
@@ -794,12 +947,13 @@ function renderChart() {
   if (m.length === 0) return;
   new Chart(document.getElementById('chartMoyennes'), {
     type: 'bar',
-    data: { labels: m.map(x => x.matiere), datasets: [{ label: 'Niveau /20', data: m.map(x => x.moyenne), backgroundColor: m.map(x => x.moyenne >= 14 ? '#4A6B3A' : x.moyenne >= 10 ? '#C9A961' : '#C8102E'), borderRadius: 0, borderWidth: 2, borderColor: '#3A2515' }] },
-    options: { indexAxis: 'y', plugins:{legend:{display:false}}, scales:{x:{beginAtZero:true, max:20, grid:{color:'#C9A961'}, ticks:{color:'#3A2515', font:{family:'Bangers, cursive'}}}, y:{grid:{display:false}, ticks:{color:'#3A2515', font:{family:'Special Elite, serif'}}}} }
+    data: { labels: m.map(x => x.matiere), datasets: [{ label: 'Niveau /20', data: m.map(x => x.moyenne), backgroundColor: m.map(x => x.moyenne >= 14 ? '#20B2AA' : x.moyenne >= 10 ? '#FFD700' : '#DC143C'), borderRadius: 10, borderWidth: 3, borderColor: '#1A1A2E' }] },
+    options: { indexAxis: 'y', plugins:{legend:{display:false}}, scales:{x:{beginAtZero:true, max:20, grid:{color:'rgba(26,26,46,0.15)'}, ticks:{color:'#1A1A2E', font:{family:'Bangers, cursive', size:14}}}, y:{grid:{display:false}, ticks:{color:'#1A1A2E', font:{family:'Fredoka, sans-serif', size:13, weight:600}}}} }
   });
 }
 
 setDateJour();
+spawnSparkles();
 loadData();
 </script>
 </body>
