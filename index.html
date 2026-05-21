@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏴‍☠️ Ferdinand · WANTED</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Special+Elite&family=Cinzel:wght@600;900&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<style>
+  :root {
+    --paper: #F4E4BC;
+    --paper-dark: #E8D199;
+    --paper-edge: #D4A66B;
+    --ink: #3A2515;
+    --sumi: #2A1810;
+    --red: #C8102E;
+    --red-dark: #8B0A1F;
+    --gold: #C9A961;
+    --gold-dark: #8B6F33;
+    --green-pirate: #4A6B3A;
+    --sea: #2C5A7C;
+    --wood: #8B4513;
+    --rope: #A0764C;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Special Elite', 'Courier New', serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-image:
+      /* Tâches papier vieilli */
+      radial-gradient(circle at 15% 20%, rgba(139, 90, 30, 0.15) 0%, transparent 8%),
+      radial-gradient(circle at 80% 30%, rgba(139, 90, 30, 0.1) 0%, transparent 6%),
+      radial-gradient(circle at 70% 75%, rgba(139, 90, 30, 0.12) 0%, transparent 10%),
+      radial-gradient(circle at 25% 85%, rgba(139, 90, 30, 0.1) 0%, transparent 7%),
+      /* Texture fibres */
+      repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(139, 90, 30, 0.02) 2px, rgba(139, 90, 30, 0.02) 4px),
+      /* Vignette */
+      radial-gradient(ellipse at center, var(--paper) 40%, var(--paper-dark) 100%);
+    position: relative;
+  }
+
+  /* Jolly Roger filigrane */
+  body::before {
+    content: '';
+    position: fixed;
+    bottom: 5%; right: 5%;
+    width: 300px; height: 300px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='35' r='18' fill='%233A2515' opacity='0.08'/%3E%3Ccircle cx='42' cy='32' r='3' fill='%23F4E4BC'/%3E%3Ccircle cx='58' cy='32' r='3' fill='%23F4E4BC'/%3E%3Cpath d='M40 45 Q50 52 60 45' stroke='%23F4E4BC' stroke-width='2' fill='none'/%3E%3Crect x='20' y='60' width='60' height='4' fill='%233A2515' opacity='0.08' transform='rotate(20 50 62)'/%3E%3Crect x='20' y='60' width='60' height='4' fill='%233A2515' opacity='0.08' transform='rotate(-20 50 62)'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Bordure double papier */
+  .wanted-frame {
+    position: relative;
+    z-index: 1;
+    margin: 24px auto;
+    max-width: 1200px;
+    padding: 0 24px;
+  }
+
+  /* HEADER WANTED */
+  header {
+    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-dark) 100%);
+    border: 4px double var(--ink);
+    margin: 16px 0 32px;
+    padding: 32px 24px 24px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    position: relative;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px solid var(--ink);
+    pointer-events: none;
+  }
+
+  .skull {
+    font-size: 42px;
+    margin-bottom: 4px;
+  }
+
+  header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 64px;
+    font-weight: 900;
+    color: var(--red);
+    letter-spacing: 12px;
+    margin: 4px 0;
+    text-shadow: 3px 3px 0 var(--ink), 6px 6px 8px rgba(0,0,0,0.2);
+    line-height: 1;
+  }
+  @media (max-width: 640px) { header h1 { font-size: 42px; letter-spacing: 6px; } }
+
+  header .alive {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 18px;
+    letter-spacing: 8px;
+    margin: 8px 0 4px;
+  }
+
+  header .ferdinand {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    color: var(--ink);
+    font-size: 36px;
+    letter-spacing: 16px;
+    margin: 16px 0 8px;
+    text-transform: uppercase;
+  }
+
+  header .bounty {
+    font-family: 'IM Fell English SC', serif;
+    color: var(--red-dark);
+    font-size: 14px;
+    letter-spacing: 4px;
+    margin-top: 12px;
+  }
+
+  header .date {
+    font-family: 'Special Elite', serif;
+    color: var(--gold-dark);
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-top: 8px;
+    text-transform: uppercase;
+  }
+
+  /* NAV */
+  nav.tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px;
+    background: var(--paper-dark);
+    border: 3px double var(--ink);
+    margin-bottom: 24px;
+    padding: 6px;
+  }
+  nav.tabs button {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    padding: 12px 22px;
+    font-family: 'Bangers', cursive;
+    font-size: 17px;
+    letter-spacing: 3px;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  nav.tabs button:hover {
+    background: var(--gold);
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  nav.tabs button.active {
+    background: var(--red);
+    color: var(--paper);
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--ink);
+  }
+
+  /* CONTENU */
+  main { padding-bottom: 60px; }
+  .panel { display: none; animation: fadeIn 0.4s ease; }
+  .panel.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* KPI cards = small wanted posters */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .kpi {
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    padding: 16px 12px;
+    text-align: center;
+    position: relative;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .kpi-val {
+    font-family: 'Bangers', cursive;
+    font-size: 48px;
+    color: var(--red);
+    line-height: 1;
+    margin-bottom: 4px;
+    text-shadow: 2px 2px 0 var(--ink);
+  }
+  .kpi-label {
+    font-family: 'IM Fell English SC', serif;
+    font-size: 13px;
+    color: var(--ink);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  /* CARDS DEVOIRS */
+  .card {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    margin-bottom: 14px;
+    padding: 14px 18px;
+    box-shadow: 3px 3px 0 var(--ink);
+    transition: transform 0.2s;
+    position: relative;
+  }
+  .card:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--ink); }
+  .card.urgent { border-color: var(--red); border-width: 3px; background: linear-gradient(135deg, var(--paper) 80%, #fce2e2 100%); }
+  .card.important { border-color: var(--gold-dark); border-width: 2px; }
+  .card.fait { opacity: 0.55; background: #E8D199; }
+  .card.fait .contenu { text-decoration: line-through; }
+
+  .card-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .card-matiere {
+    font-family: 'Bangers', cursive;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--red-dark);
+    flex: 1;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+  }
+  .card-meta {
+    text-align: right;
+    font-size: 11px;
+    color: var(--gold-dark);
+    letter-spacing: 1px;
+    font-family: 'IM Fell English SC', serif;
+  }
+  .card-date {
+    font-family: 'Bangers', cursive;
+    color: var(--ink);
+    font-size: 16px;
+  }
+  .card .contenu {
+    color: var(--ink);
+    font-size: 14px;
+    margin-top: 6px;
+    line-height: 1.5;
+    font-family: 'Special Elite', serif;
+  }
+
+  /* CHECKBOX pirate */
+  .check-fait {
+    appearance: none;
+    width: 30px; height: 30px;
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .check-fait:hover { background: var(--gold); }
+  .check-fait:checked { background: var(--green-pirate); border-color: var(--ink); }
+  .check-fait:checked::after {
+    content: '☠';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--paper);
+    font-size: 20px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    font-family: 'Bangers', cursive;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-top: 6px;
+    border: 1.5px solid var(--ink);
+    text-transform: uppercase;
+  }
+  .badge.urgent { background: var(--red); color: var(--paper); }
+  .badge.important { background: var(--gold); color: var(--ink); }
+  .badge.normal { background: var(--green-pirate); color: var(--paper); }
+  .badge.demain { background: var(--ink); color: var(--paper); }
+
+  /* SECTION */
+  .section-titre {
+    display: flex;
+    align-items: center;
+    margin: 28px 0 14px;
+    gap: 12px;
+  }
+  .section-titre h2 {
+    font-family: 'Bangers', cursive;
+    color: var(--red);
+    font-size: 26px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0 var(--ink);
+  }
+  .section-titre .ligne { flex: 1; height: 3px; background: repeating-linear-gradient(90deg, var(--ink) 0 8px, transparent 8px 14px); }
+
+  /* EDT grille */
+  .edt-grid {
+    display: grid;
+    grid-template-columns: 70px repeat(6, 1fr);
+    gap: 2px;
+    background: var(--ink);
+    border: 3px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
+    margin-bottom: 16px;
+    overflow-x: auto;
+  }
+  .edt-cell {
+    background: var(--paper);
+    padding: 4px;
+    min-height: 32px;
+    position: relative;
+    font-size: 11px;
+  }
+  .edt-cell.head {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Bangers', cursive;
+    text-align: center;
+    padding: 8px 4px;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+  .edt-cell.heure {
+    background: var(--paper-dark);
+    color: var(--ink);
+    font-family: 'Bangers', cursive;
+    text-align: center;
+    padding: 4px;
+    font-size: 12px;
+  }
+  .edt-cell.today { background: linear-gradient(180deg, #fff7d6 0%, var(--paper) 100%); border-left: 3px solid var(--red); }
+  .cours {
+    background: var(--gold);
+    border-left: 4px solid var(--ink);
+    padding: 4px 6px;
+    margin-bottom: 2px;
+    font-family: 'Special Elite', serif;
+  }
+  .cours .matiere { font-weight: bold; color: var(--ink); font-size: 11px; }
+  .cours .prof { color: var(--ink); font-size: 10px; opacity: 0.7; }
+  .cours .salle { color: var(--red-dark); font-size: 10px; }
+  .cours.annule { background: #ffd6d6; opacity: 0.5; text-decoration: line-through; }
+
+  /* Notes */
+  .note-card {
+    display: grid;
+    grid-template-columns: 90px 1fr 110px;
+    align-items: center;
+    gap: 14px;
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    padding: 12px 18px;
+    margin-bottom: 6px;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .note-date { font-family: 'Special Elite'; font-size: 12px; color: var(--gold-dark); }
+  .note-matiere { font-family: 'Bangers', cursive; color: var(--ink); font-size: 17px; letter-spacing: 1px; }
+  .note-devoir { font-size: 11px; color: var(--gold-dark); font-family: 'Special Elite'; }
+  .note-valeur {
+    font-family: 'Bangers', cursive;
+    font-size: 30px;
+    text-align: right;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 0 var(--ink);
+  }
+  .note-valeur.bonne { color: var(--green-pirate); }
+  .note-valeur.moyenne { color: var(--gold-dark); }
+  .note-valeur.basse { color: var(--red); }
+  .note-valeur small { font-size: 14px; color: var(--ink); text-shadow: none; opacity: 0.6; }
+
+  /* Chart */
+  .chart-container {
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .chart-container h3 {
+    font-family: 'Bangers', cursive;
+    color: var(--red);
+    font-size: 24px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 16px;
+    text-shadow: 2px 2px 0 var(--ink);
+  }
+
+  /* Empty */
+  .empty {
+    text-align: center;
+    padding: 60px 20px;
+    font-family: 'IM Fell English SC';
+    color: var(--gold-dark);
+  }
+  .empty .skull {
+    font-size: 80px;
+    opacity: 0.4;
+    margin-bottom: 16px;
+  }
+
+  /* Loader */
+  #loader {
+    position: fixed;
+    inset: 0;
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: opacity 0.5s;
+  }
+  #loader.done { opacity: 0; pointer-events: none; }
+  #loader .skull-big {
+    font-size: 100px;
+    animation: sway 1.5s ease-in-out infinite;
+  }
+  @keyframes sway { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+  #loader .txt {
+    font-family: 'Bangers', cursive;
+    color: var(--red);
+    font-size: 32px;
+    letter-spacing: 6px;
+    margin-top: 16px;
+    text-shadow: 2px 2px 0 var(--ink);
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--gold-dark);
+    font-family: 'IM Fell English SC';
+    font-size: 12px;
+    letter-spacing: 3px;
+    border-top: 3px double var(--ink);
+    margin-top: 40px;
+  }
+
+  .config-warn {
+    background: #FFF3CD;
+    border: 2px solid var(--gold-dark);
+    color: var(--ink);
+    padding: 16px;
+    margin: 16px 0;
+    text-align: center;
+    font-family: 'Special Elite';
+  }
+  .config-warn code { background: rgba(0,0,0,0.08); padding: 2px 6px; }
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="skull-big">🏴‍☠️</div>
+  <div class="txt">CHARGEMENT</div>
+</div>
+
+<div class="wanted-frame">
+  <header>
+    <div class="skull">🏴‍☠️</div>
+    <h1>WANTED</h1>
+    <div class="alive">DEAD OR ALIVE</div>
+    <div class="ferdinand">FERDINAND</div>
+    <div class="bounty">RECOMPENSE : DEVOIRS, NOTES &amp; EMPLOI DU TEMPS</div>
+    <div class="date" id="dateJour"></div>
+  </header>
+
+  <nav class="tabs">
+    <button class="active" data-tab="devoirs">⚓ DEVOIRS</button>
+    <button data-tab="edt">🗺️ EMPLOI DU TEMPS</button>
+    <button data-tab="priorites">💥 PRIORITÉS</button>
+    <button data-tab="notes">📜 NOTES</button>
+  </nav>
+
+  <main>
+    <div id="configWarn" class="config-warn" style="display:none;">
+      ⚠️ Configuration requise : remplace <code>APPS_SCRIPT_URL</code> en haut du fichier <code>index.html</code> par l'URL de ton Apps Script déployé.
+    </div>
+
+    <section class="panel active" id="panel-devoirs">
+      <div class="kpi-grid" id="kpiDevoirs"></div>
+      <div id="devoirsListe"></div>
+    </section>
+
+    <section class="panel" id="panel-edt">
+      <div id="edtSemaine"></div>
+    </section>
+
+    <section class="panel" id="panel-priorites">
+      <div id="prioritesListe"></div>
+    </section>
+
+    <section class="panel" id="panel-notes">
+      <div class="chart-container">
+        <h3>⚡ Niveaux par matière</h3>
+        <canvas id="chartMoyennes" height="140"></canvas>
+      </div>
+      <div class="section-titre">
+        <h2>Dernières notes</h2>
+        <span class="ligne"></span>
+      </div>
+      <div id="notesListe"></div>
+    </section>
+  </main>
+
+  <footer>
+    🏴‍☠️ MIS À JOUR : <span id="lastUpdate">—</span> · ONE PIECE EDITION
+  </footer>
+</div>
+
+<script>
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzxRJwRD46bN9IM-3fQsjGoekyLYaLeNohwabPc0l__z4Ocv5O7HeS418wE3FSqv4D2/exec";
+
+let DATA = { devoirs: [], notes: [], edt: [], priorites: { moyennes: [], priorites: [] } };
+
+function setDateJour() {
+  document.getElementById('dateJour').textContent = new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).toUpperCase();
+}
+
+document.querySelectorAll('nav.tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+async function loadData() {
+  if (APPS_SCRIPT_URL.includes('REMPLACE_MOI')) {
+    document.getElementById('configWarn').style.display = 'block';
+    document.getElementById('loader').classList.add('done');
+    return;
+  }
+  try {
+    const r = await fetch(APPS_SCRIPT_URL + '?action=all&t=' + Date.now());
+    DATA = await r.json();
+    if (DATA.error) throw new Error(DATA.error);
+    document.getElementById('lastUpdate').textContent = new Date(DATA.updated || Date.now()).toLocaleString('fr-FR');
+    render();
+  } catch (e) {
+    document.querySelector('main').insertAdjacentHTML('afterbegin', `<div class="config-warn">Erreur : ${e.message}</div>`);
+  } finally {
+    setTimeout(() => document.getElementById('loader').classList.add('done'), 300);
+  }
+}
+
+function render() { renderDevoirs(); renderEdt(); renderPriorites(); renderNotes(); renderChart(); }
+
+function escapeHtml(s) { if (s == null) return ''; return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+function fmtJour(d) { return d.toLocaleDateString('fr-FR', { day:'2-digit', month:'2-digit' }); }
+
+/* ---- DEVOIRS ---- */
+function renderDevoirs() {
+  const liste = DATA.devoirs || [];
+  const today = new Date(); today.setHours(0,0,0,0);
+  const demain = new Date(today); demain.setDate(demain.getDate() + 1);
+  const aFaire = liste.filter(d => !d.fait && new Date(d.date_remise) >= today);
+  const pourDemain = liste.filter(d => { const dr = new Date(d.date_remise); dr.setHours(0,0,0,0); return dr.getTime() === demain.getTime(); });
+  const faits = liste.filter(d => d.fait);
+  const enRetard = liste.filter(d => !d.fait && new Date(d.date_remise) < today);
+
+  document.getElementById('kpiDevoirs').innerHTML = `
+    <div class="kpi"><div class="kpi-val">${aFaire.length}</div><div class="kpi-label">À FAIRE</div></div>
+    <div class="kpi"><div class="kpi-val">${pourDemain.length}</div><div class="kpi-label">DEMAIN</div></div>
+    <div class="kpi"><div class="kpi-val" style="color:var(--green-pirate)">${faits.length}</div><div class="kpi-label">FAITS</div></div>
+    <div class="kpi"><div class="kpi-val" style="color:var(--red-dark)">${enRetard.length}</div><div class="kpi-label">EN RETARD</div></div>`;
+
+  if (liste.length === 0) {
+    document.getElementById('devoirsListe').innerHTML = `<div class="empty"><div class="skull">🏴‍☠️</div>Aucun devoir saisi</div>`;
+    return;
+  }
+  const groupes = {};
+  liste.forEach(d => { (groupes[d.date_remise || 'x'] = groupes[d.date_remise || 'x'] || []).push(d); });
+  const keys = Object.keys(groupes).sort();
+  let html = '';
+  keys.forEach(k => {
+    const dd = new Date(k); dd.setHours(0,0,0,0);
+    let lbl;
+    if (dd.getTime() === today.getTime()) lbl = "AUJOURD'HUI";
+    else if (dd.getTime() === demain.getTime()) lbl = "DEMAIN";
+    else if (dd < today) lbl = dd.toLocaleDateString('fr-FR', {weekday:'long', day:'numeric', month:'long'}).toUpperCase() + ' (passé)';
+    else lbl = dd.toLocaleDateString('fr-FR', {weekday:'long', day:'numeric', month:'long'}).toUpperCase();
+    html += `<div class="section-titre"><h2>${lbl}</h2><span class="ligne"></span></div>`;
+    groupes[k].forEach(d => html += cardDevoir(d, today, demain));
+  });
+  document.getElementById('devoirsListe').innerHTML = html;
+
+  document.querySelectorAll('.check-fait').forEach(cb => {
+    cb.addEventListener('change', async (e) => {
+      const id = e.target.dataset.id;
+      const fait = e.target.checked;
+      const card = e.target.closest('.card');
+      card.classList.toggle('fait', fait);
+      try {
+        await fetch(APPS_SCRIPT_URL, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({action:'toggle_fait', id, fait}) });
+        const d = DATA.devoirs.find(x => x.id === id); if (d) d.fait = fait;
+        renderDevoirs();
+      } catch (err) { alert('Erreur : ' + err.message); e.target.checked = !fait; }
+    });
+  });
+}
+function cardDevoir(d, today, demain) {
+  const dr = new Date(d.date_remise); dr.setHours(0,0,0,0);
+  const j = Math.ceil((dr - today) / 86400000);
+  let cls = 'card';
+  if (d.fait) cls += ' fait'; else if (j <= 0) cls += ' urgent'; else if (j === 1) cls += ' important';
+  let badge = '';
+  if (!d.fait) {
+    if (j < 0) badge = `<span class="badge urgent">EN RETARD</span>`;
+    else if (j === 0) badge = `<span class="badge urgent">AUJOURD'HUI</span>`;
+    else if (j === 1) badge = `<span class="badge demain">DEMAIN</span>`;
+    else if (j <= 3) badge = `<span class="badge important">DANS ${j}J</span>`;
+    else badge = `<span class="badge normal">DANS ${j}J</span>`;
+  }
+  return `
+    <div class="card ${cls}">
+      <div class="card-head">
+        <input type="checkbox" class="check-fait" data-id="${d.id}" ${d.fait ? 'checked' : ''}>
+        <div style="flex:1">
+          <div class="card-matiere">${escapeHtml(d.matiere || '?')}</div>
+          ${badge}
+        </div>
+        <div class="card-meta"><div class="card-date">${fmtJour(dr)}</div></div>
+      </div>
+      <div class="contenu">${escapeHtml(d.contenu || '(aucun détail)')}</div>
+    </div>`;
+}
+
+/* ---- EDT ---- */
+function renderEdt() {
+  const edt = DATA.edt || [];
+  if (edt.length === 0) {
+    document.getElementById('edtSemaine').innerHTML = `<div class="empty"><div class="skull">🗺️</div>Pas d'emploi du temps</div>`;
+    return;
+  }
+  // Trouver lundi de la semaine en cours
+  const today = new Date(); today.setHours(0,0,0,0);
+  const dow = today.getDay() || 7;
+  const monday = new Date(today); monday.setDate(monday.getDate() - dow + 1);
+  // Liste les 6 jours (lundi-samedi)
+  const jours = [];
+  for (let i = 0; i < 6; i++) {
+    const d = new Date(monday); d.setDate(d.getDate() + i);
+    jours.push(d);
+  }
+
+  // Filtrer cours de cette semaine et groupes par jour
+  const coursParJour = {};
+  edt.forEach(c => {
+    if (!c.start) return;
+    const dStr = String(c.start).substring(0, 10);
+    if (!coursParJour[dStr]) coursParJour[dStr] = [];
+    coursParJour[dStr].push(c);
+  });
+  Object.values(coursParJour).forEach(arr => arr.sort((a,b) => String(a.start).localeCompare(String(b.start))));
+
+  // Heures de 8h à 18h
+  const heures = [];
+  for (let h = 8; h <= 17; h++) heures.push(h);
+
+  let html = `<div class="section-titre"><h2>Semaine du ${fmtJour(monday)}</h2><span class="ligne"></span></div>`;
+  html += `<div class="edt-grid">`;
+  html += `<div class="edt-cell head">H</div>`;
+  jours.forEach(j => {
+    const isToday = j.getTime() === today.getTime();
+    const lbl = j.toLocaleDateString('fr-FR', { weekday: 'short', day: '2-digit', month: '2-digit' });
+    html += `<div class="edt-cell head"${isToday ? ' style="background:var(--red)"' : ''}>${lbl}</div>`;
+  });
+
+  // Pour chaque heure, créer une ligne
+  heures.forEach(h => {
+    html += `<div class="edt-cell heure">${h}h</div>`;
+    jours.forEach(j => {
+      const isToday = j.getTime() === today.getTime();
+      const dStr = j.toISOString().substring(0, 10);
+      const courses = (coursParJour[dStr] || []).filter(c => {
+        const startH = parseInt(String(c.start).substring(11, 13), 10);
+        return startH === h;
+      });
+      let cellHtml = '';
+      courses.forEach(c => {
+        const startTime = String(c.start).substring(11, 16);
+        const endTime = String(c.end).substring(11, 16);
+        const annule = c.annule === 'Oui';
+        cellHtml += `<div class="cours ${annule ? 'annule' : ''}" style="border-left-color:${c.couleur || 'var(--ink)'}">
+                       <div class="matiere">${escapeHtml(c.matiere || '')}</div>
+                       <div style="font-size:9px; color:var(--gold-dark);">${startTime}-${endTime}</div>
+                       ${c.prof ? `<div class="prof">${escapeHtml(c.prof.substring(0, 20))}</div>` : ''}
+                       ${c.salle ? `<div class="salle">📍 ${escapeHtml(c.salle)}</div>` : ''}
+                     </div>`;
+      });
+      html += `<div class="edt-cell${isToday ? ' today' : ''}">${cellHtml}</div>`;
+    });
+  });
+  html += `</div>`;
+
+  // Cours du jour résumés
+  const dStrToday = today.toISOString().substring(0, 10);
+  const aujourdhui = coursParJour[dStrToday] || [];
+  if (aujourdhui.length > 0) {
+    html += `<div class="section-titre"><h2>⚓ Aujourd'hui</h2><span class="ligne"></span></div>`;
+    aujourdhui.forEach(c => {
+      const startTime = String(c.start).substring(11, 16);
+      const endTime = String(c.end).substring(11, 16);
+      const annule = c.annule === 'Oui';
+      html += `<div class="card ${annule ? 'fait' : ''}" style="border-left: 5px solid ${c.couleur || 'var(--ink)'}">
+                 <div class="card-head">
+                   <div style="flex:1">
+                     <div class="card-matiere">${escapeHtml(c.matiere || '')} ${annule ? '<span style="color:var(--red); font-size:14px;">⚠️ ANNULÉ</span>' : ''}</div>
+                     <div style="color:var(--ink); font-size:13px; font-family:'Special Elite';">${c.prof || ''} ${c.salle ? '· 📍 ' + c.salle : ''}</div>
+                   </div>
+                   <div class="card-meta"><div class="card-date">${startTime}<br>${endTime}</div></div>
+                 </div>
+               </div>`;
+    });
+  }
+  document.getElementById('edtSemaine').innerHTML = html;
+}
+
+/* ---- PRIORITES ---- */
+function renderPriorites() {
+  const prio = (DATA.priorites && DATA.priorites.priorites) || [];
+  if (prio.length === 0) {
+    document.getElementById('prioritesListe').innerHTML = `<div class="empty"><div class="skull">⚓</div>Toutes les primes sont collectées !</div>`;
+    return;
+  }
+  const urg = prio.filter(p => p.niveau === 'URGENT');
+  const imp = prio.filter(p => p.niveau === 'IMPORTANT');
+  const nor = prio.filter(p => p.niveau === 'NORMAL');
+  let html = `<div class="card" style="background: var(--gold); border:3px solid var(--ink);"><div class="card-matiere">📜 Système de primes</div><div class="contenu">Tri par <b>urgence</b> + matières en difficulté en priorité (comme la chasse aux pirates les plus dangereux).</div></div>`;
+  if (urg.length) { html += `<div class="section-titre"><h2>💥 URGENT</h2><span class="ligne"></span></div>`; urg.forEach(p => html += cardPrio(p, 'urgent')); }
+  if (imp.length) { html += `<div class="section-titre"><h2>⚔️ IMPORTANT</h2><span class="ligne"></span></div>`; imp.forEach(p => html += cardPrio(p, 'important')); }
+  if (nor.length) { html += `<div class="section-titre"><h2>🗡️ NORMAL</h2><span class="ligne"></span></div>`; nor.forEach(p => html += cardPrio(p, 'normal')); }
+  document.getElementById('prioritesListe').innerHTML = html;
+}
+function cardPrio(p, cls) {
+  const moy = (p.moyenne_matiere != null) ? `<span style="font-size:11px; color:var(--gold-dark);"> · moy: <b style="color:${p.moyenne_matiere>=14?'var(--green-pirate)':p.moyenne_matiere>=10?'var(--gold-dark)':'var(--red)'}">${p.moyenne_matiere}/20</b></span>` : '';
+  const j = p.jours_restants;
+  let r;
+  if (j < 0) r = `<span class="badge urgent">EN RETARD ${-j}j</span>`;
+  else if (j === 0) r = `<span class="badge urgent">AUJOURD'HUI</span>`;
+  else if (j === 1) r = `<span class="badge demain">DEMAIN</span>`;
+  else r = `<span class="badge ${cls}">DANS ${j}j</span>`;
+  return `<div class="card ${cls}"><div class="card-head"><div style="flex:1"><div class="card-matiere">${escapeHtml(p.matiere)}</div>${r}${moy}</div><div class="card-meta"><div class="card-date">${fmtJour(new Date(p.date_remise))}</div></div></div><div class="contenu">${escapeHtml(p.contenu || '')}</div></div>`;
+}
+
+/* ---- NOTES ---- */
+function renderNotes() {
+  const n = DATA.notes || [];
+  if (n.length === 0) { document.getElementById('notesListe').innerHTML = `<div class="empty"><div class="skull">📜</div>Aucune note</div>`; return; }
+  let h = '';
+  n.slice(0, 60).forEach(no => {
+    const v = parseFloat(String(no.note).replace(',', '.'));
+    const s = parseFloat(no.sur) || 20;
+    const r = !isNaN(v) ? (v / s * 20) : null;
+    const c = r === null ? '' : r >= 14 ? 'bonne' : r >= 10 ? 'moyenne' : 'basse';
+    h += `<div class="note-card"><div><div class="note-matiere">${escapeHtml(no.matiere)}</div><div class="note-devoir">${escapeHtml(no.devoir || '')}</div><div class="note-date">${fmtJour(new Date(no.date))}</div></div><div></div><div class="note-valeur ${c}">${no.note}<small>/${no.sur}</small></div></div>`;
+  });
+  document.getElementById('notesListe').innerHTML = h;
+}
+
+function renderChart() {
+  const m = ((DATA.priorites && DATA.priorites.moyennes) || []).filter(x => x.moyenne !== null);
+  if (m.length === 0) return;
+  new Chart(document.getElementById('chartMoyennes'), {
+    type: 'bar',
+    data: { labels: m.map(x => x.matiere), datasets: [{ label: 'Niveau /20', data: m.map(x => x.moyenne), backgroundColor: m.map(x => x.moyenne >= 14 ? '#4A6B3A' : x.moyenne >= 10 ? '#C9A961' : '#C8102E'), borderRadius: 0, borderWidth: 2, borderColor: '#3A2515' }] },
+    options: { indexAxis: 'y', plugins:{legend:{display:false}}, scales:{x:{beginAtZero:true, max:20, grid:{color:'#C9A961'}, ticks:{color:'#3A2515', font:{family:'Bangers, cursive'}}}, y:{grid:{display:false}, ticks:{color:'#3A2515', font:{family:'Special Elite, serif'}}}} }
+  });
+}
+
+setDateJour();
+loadData();
+</script>
+</body>
+</html>
